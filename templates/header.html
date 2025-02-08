@@ -1,0 +1,25 @@
+{{ define "header" }}
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="/styles/styles.css" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <script src="/scripts/jquery.min.js"></script>
+    <script src="/scripts/main.js"></script> 
+    <script type="text/javascript" src="/scripts/toastify.min.js"></script>
+    <title>{{ .title }}</title>
+</head>
+<body>
+    <header>
+        <a href="/" class="material-symbols-outlined" title="главная">home</a>
+        {{ if and .session .session.User }}
+            <a href="/users/{{ .session.User.ID }}" title="страница профиля">{{ .session.User.Username }}</a>
+            <a href="#" class="material-symbols-outlined" onclick="logout()" title="выход">logout</a>
+        {{ else }}
+            <a href="/users/login" class="material-symbols-outlined" title="вход">login</a>
+        {{ end }}
+    </header>
+{{ end }}

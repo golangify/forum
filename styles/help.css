@@ -1,0 +1,36 @@
+.center {
+    text-align: center;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+
+.mt-10 {
+    margin-top: 10px;
+}
+.mb-5 {
+    margin-bottom: 5px;
+}
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+.text-red {
+    color: #ff4136;
+}
+.text-red:first-letter {
+    text-transform: uppercase;
+}
+.text-red::after{
+    content: '.';
+}

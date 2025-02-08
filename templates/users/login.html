@@ -1,0 +1,18 @@
+{{ define "users/login" }}
+{{ template "header" . }}
+<section class="login">
+    <h1 class="mb-10">Вход</h1>
+    <form action="/users/login" method="post" class="flex flex-column">
+        <label for="username">Имя:</label>
+        <input class="mb-10" type="text" name="username" value="{{ .username }}">
+        <label for="password">Пароль:</label>
+        <input class="mb-10" type="password" name="password" value="{{ .password }}">
+        {{ if .error }}
+        <div class="text-red mb-10">{{ .error }}</div>
+        {{ end }}
+        <input class="mb-10" type="submit" value="войти" title="войти в аккаунт">
+    </form>
+    <div>Нет аккаунта? <a href="/users/register" title="перейти на страницу регистрации">Регистрация</a></div>
+</section>
+{{ template "footer" . }}
+{{ end }}

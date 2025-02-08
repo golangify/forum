@@ -1,0 +1,10 @@
+{{ define "sections/sections" }}
+{{ template "header" . }}
+<section>
+    {{ if .session.User }}
+    <a href="/sections/new" class="material-symbols-outlined button" title="создать новый раздел">add</a>
+    {{ end }}
+    <h1 class="center">Разделы</h1>
+</section>
+{{ template "footer" . }}
+{{ end }}

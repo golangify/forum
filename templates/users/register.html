@@ -1,0 +1,18 @@
+{{ define "users/register" }}
+{{ template "header" . }}
+<section class="register">
+    <h1 class="mb-10">Регистрация</h1>
+    <form action="/users/register" method="post" class="flex flex-column">
+        <label for="username">Имя:</label>
+        <input class="mb-10" type="text" name="username" value="{{ .username }}">
+        <label for="password">Пароль:</label>
+        <input class="mb-10" type="password" name="password" value="{{ .password }}">
+        {{ if .error }}
+        <div class="text-red mb-10">{{ .error }}</div>
+        {{ end }}
+        <input class="mb-10" type="submit" value="зарегистрироваться" title="зарегистрировать новый аккаунт">
+    </form>
+    <div>Уже есть аккаунт? <a href="/users/login" title="перейти на страницу входа">Войти</a></div>
+</section>
+{{ template "footer" . }}
+{{ end }}
