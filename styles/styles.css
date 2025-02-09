@@ -26,7 +26,8 @@ html {
     height: 100%;
     width: 100%;
     background: url(/assets/background/diagmonds.png);
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
 }
 
 html {
@@ -44,6 +45,7 @@ a:visited {
 time {
     color: var(--text-color-disabled);
     font-size: 13px;
+    width: max-content;
 }
 
 body > header {
@@ -70,7 +72,7 @@ body > header > a:hover {
 
 body > section {
     max-width: 1000px;
-    margin: 20px auto;
+    margin: 30px auto;
     background-color: var(--background-color);
     padding: 10px;
     border-radius: var(--border-radius);

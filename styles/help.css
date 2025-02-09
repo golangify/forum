@@ -16,6 +16,9 @@
 .flex-row {
     flex-direction: row;
 }
+.justify-between {
+    justify-content: space-between;
+}
 
 .w-100 {
     width: 100%;
@@ -24,6 +27,9 @@
     height: 100%;
 }
 
+.m-10 {
+    margin: 10px;
+}
 .mt-10 {
     margin-top: 10px;
 }
@@ -42,6 +48,9 @@
 .ml-a {
     margin-left: auto;
 }
+.p-10 {
+    padding: 10px;
+}
 
 .text-red {
     color: #ff4136;
@@ -54,16 +63,24 @@
 }
 .text-disabled {
     color: var(--text-color-disabled);
-    font-size: 13px;
+    font-size: 14px;
 }
 .truncate {
+    display: inline-block;
     white-space: nowrap;        
     overflow: hidden;           
     text-overflow: ellipsis;    
-    max-width: 300px;               
+    max-width: 100%;               
 }
-  
+
+.whitespace-nowrap {
+    white-space: nowrap;
+}
 
 .decoration-none {
     text-decoration: none;
+}
+
+.background-secondary {
+    background-color: var(--background-color-secondary);
 }

@@ -16,7 +16,7 @@
     <header>
         <a href="/" class="material-symbols-outlined" title="главная">home</a>
         {{ if and .session .session.User }}
-            <a href="/users/{{ .session.User.ID }}" title="страница профиля">{{ .session.User.Username }}</a>
+            <a href="/users/{{ .session.User.ID }}" title="страница профиля"><span>{{ .session.User.Username }}</span></a>
             <a href="#" class="material-symbols-outlined" onclick="logout()" title="выход">logout</a>
         {{ else }}
             <a href="/users/login" class="material-symbols-outlined" title="вход">login</a>

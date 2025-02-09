@@ -6,13 +6,13 @@
     {{ end }}
     <h1 class="center mb-10">Разделы</h1>
     {{ range .sections }}
-    <a class="decoration-none" href="/sections/{{ .ID }}">
-        <div class="flex flex-row mb-10">
-            <span class="h-100 content-center mr-10 material-symbols-outlined"></span>
-            <div class="w-100">
-                <header class="flex flex-row space-between"><span>{{ .Title }}</span><time class="ml-10 content-center">{{ timeAgo .UpdatedAt }}</time></header>
-                <div class="text-disabled truncate">{{ .Body }}</div>
-            </div>
+    <a class="decoration-none" href="/sections/{{ .ID }}" title="{{ .Body }}">
+        <div class="w-100 mb-10">
+            <header class="flex justify-between items-center">
+                <span class="truncate max-w-xs">{{ .Title }}</span>
+                <time class="ml-10 whitespace-nowrap">{{ timeAgo .UpdatedAt }}</time>
+            </header>
+            <div class="text-disabled truncate">{{ .Body }}</div>
         </div>
     </a>
     {{ end }}

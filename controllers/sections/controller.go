@@ -31,7 +31,7 @@ func NewSectionController(config *config.Config, engine *gin.Engine, database *g
 
 		g.GET("/new", c.middlewareController.IfAuthorized, c.getNew)
 		g.POST("/", c.middlewareController.IfAuthorized, c.post)
-		// g.GET("/:id", c.getByID)
+		g.GET("/:id", c.getByID)
 	}
 
 	return c
