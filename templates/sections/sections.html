@@ -4,7 +4,18 @@
     {{ if .session.User }}
     <a href="/sections/new" class="material-symbols-outlined button" title="создать новый раздел">add</a>
     {{ end }}
-    <h1 class="center">Разделы</h1>
+    <h1 class="center mb-10">Разделы</h1>
+    {{ range .sections }}
+    <a class="decoration-none" href="/sections/{{ .ID }}">
+        <div class="flex flex-row mb-10">
+            <span class="h-100 content-center mr-10 material-symbols-outlined"></span>
+            <div class="w-100">
+                <header class="flex flex-row space-between"><span>{{ .Title }}</span><time class="ml-10 content-center">{{ timeAgo .UpdatedAt }}</time></header>
+                <div class="text-disabled truncate">{{ .Body }}</div>
+            </div>
+        </div>
+    </a>
+    {{ end }}
 </section>
 {{ template "footer" . }}
 {{ end }}

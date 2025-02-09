@@ -46,6 +46,7 @@ func main() {
 	engine.Use(middlewareController.Identificate)
 
 	errorController := errorcontroller.NewErrorController(config, engine, database, middlewareController)
+	engine.NoRoute(errorController.NotFound)
 
 	indexcontroller.NewIndexController(config, engine, database, middlewareController, errorController)
 	sectioncontroller.NewSectionController(config, engine, database, middlewareController, errorController)

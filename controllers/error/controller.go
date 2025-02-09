@@ -26,6 +26,7 @@ func NewErrorController(config *config.Config, engine *gin.Engine, database *gor
 	g := c.engine.Group("/error")
 	{
 		g.GET("/not-found", c.NotFound)
+		g.GET("/internal-server", c.InternalServerError)
 	}
 
 	return c
