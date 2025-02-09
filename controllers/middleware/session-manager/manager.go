@@ -47,8 +47,13 @@ func (m *SessionManager) GetSession(ctx *gin.Context) (*models.Session, error) {
 }
 
 func (m *SessionManager) NewSession(ctx *gin.Context) (*models.Session, error) {
+	var userAgent string = "unknown"
+	if h := ctx.GetHeader("user-agent"); h != "" {
+		userAgent = h
+	}
 	session := &models.Session{
 		Identificator: m.generateSessionIdentificator(),
+		UserAgent:     userAgent,
 		FirstIP:       ctx.ClientIP(),
 		LastIP:        ctx.ClientIP(),
 		ExpiresAt:     time.Now().Add(time.Duration(m.config.Session.DaysTimeout) * time.Hour * 24),
