@@ -16,5 +16,5 @@ func (c *userController) postLogout(ctx *gin.Context) {
 		})
 		return
 	}
-	c.middleware.SessionManager.DeleteSession(ctx)
+	c.middlewareController.SessionManager.DeleteSession(ctx)
 }

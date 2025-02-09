@@ -1,0 +1,8 @@
+{{ define "error/error" }}
+{{ template "header" . }}
+<section>
+    <h1 class="center">Ошибка {{ .code }}</h1>
+    <div class="center text-red">{{ .error }}</div>
+</section>
+{{ template "footer" . }}
+{{ end }}

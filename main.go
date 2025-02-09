@@ -2,6 +2,7 @@ package main
 
 import (
 	"forum/config"
+	errorcontroller "forum/controllers/error"
 	indexcontroller "forum/controllers/index"
 	middlewarecontroller "forum/controllers/middleware"
 	sectioncontroller "forum/controllers/sections"
@@ -44,10 +45,12 @@ func main() {
 	middlewareController := middlewarecontroller.NewMiddlewareController(config, engine, database)
 	engine.Use(middlewareController.Identificate)
 
-	indexcontroller.NewIndexController(engine)
-	sectioncontroller.NewSectionController(config, engine, database)
-	topiccontroller.NewTopicController(config, engine, database)
-	usercontroller.NewUserController(config, engine, database, middlewareController)
+	errorController := errorcontroller.NewErrorController(config, engine, database, middlewareController)
+
+	indexcontroller.NewIndexController(config, engine, database, middlewareController, errorController)
+	sectioncontroller.NewSectionController(config, engine, database, middlewareController, errorController)
+	topiccontroller.NewTopicController(config, engine, database, middlewareController, errorController)
+	usercontroller.NewUserController(config, engine, database, middlewareController, errorController)
 
 	engine.Run(":8080")
 }

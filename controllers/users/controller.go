@@ -2,6 +2,7 @@ package usercontroller
 
 import (
 	"forum/config"
+	errorcontroller "forum/controllers/error"
 	middlewarecontroller "forum/controllers/middleware"
 
 	"github.com/gin-gonic/gin"
@@ -9,18 +10,20 @@ import (
 )
 
 type userController struct {
-	config     *config.Config
-	engine     *gin.Engine
-	database   *gorm.DB
-	middleware *middlewarecontroller.MiddlewareController
+	config               *config.Config
+	engine               *gin.Engine
+	database             *gorm.DB
+	middlewareController *middlewarecontroller.MiddlewareController
+	errorController      *errorcontroller.ErrorController
 }
 
-func NewUserController(config *config.Config, engine *gin.Engine, database *gorm.DB, middleware *middlewarecontroller.MiddlewareController) *userController {
+func NewUserController(config *config.Config, engine *gin.Engine, database *gorm.DB, middlewareController *middlewarecontroller.MiddlewareController, errorController *errorcontroller.ErrorController) *userController {
 	c := &userController{
-		config:     config,
-		engine:     engine,
-		database:   database,
-		middleware: middleware,
+		config:               config,
+		engine:               engine,
+		database:             database,
+		middlewareController: middlewareController,
+		errorController:      errorController,
 	}
 
 	g := c.engine.Group("/users")

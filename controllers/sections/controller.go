@@ -2,22 +2,27 @@ package sectioncontroller
 
 import (
 	"forum/config"
+	errorcontroller "forum/controllers/error"
+	middlewarecontroller "forum/controllers/middleware"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
 
 type sectionController struct {
-	config   *config.Config
-	engine   *gin.Engine
-	database *gorm.DB
+	config               *config.Config
+	engine               *gin.Engine
+	database             *gorm.DB
+	middlewareController *middlewarecontroller.MiddlewareController
+	errorController      *errorcontroller.ErrorController
 }
 
-func NewSectionController(config *config.Config, engine *gin.Engine, database *gorm.DB) *sectionController {
+func NewSectionController(config *config.Config, engine *gin.Engine, database *gorm.DB, middlewareController *middlewarecontroller.MiddlewareController, errorController *errorcontroller.ErrorController) *sectionController {
 	c := &sectionController{
-		config:   config,
-		engine:   engine,
-		database: database,
+		config:               config,
+		engine:               engine,
+		database:             database,
+		middlewareController: middlewareController,
 	}
 
 	g := c.engine.Group("/sections")
@@ -26,6 +31,7 @@ func NewSectionController(config *config.Config, engine *gin.Engine, database *g
 
 		g.GET("/new", c.getNew)
 		g.POST("/", c.post)
+		// g.GET("/:id", c.getByID)
 	}
 
 	return c

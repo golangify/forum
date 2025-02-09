@@ -1,0 +1,7 @@
+{{ define "sections/sections" }}
+{{ template "header" . }}
+<section>
+    <span class="material-symbols-outlined">account circle</span><span>{{ .section.User.Username }}</span>
+</section>
+{{ template "footer" . }}
+{{ end }}

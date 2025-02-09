@@ -43,7 +43,7 @@ func (c *userController) postRegister(ctx *gin.Context) {
 		return
 	}
 
-	err = c.middleware.SessionManager.BindSessionToUser(ctx, &registeredUser)
+	err = c.middlewareController.SessionManager.BindSessionToUser(ctx, &registeredUser)
 	if err != nil {
 		c.renderRegisterPage(ctx, registerRequest.Username, err)
 		return

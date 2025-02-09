@@ -42,7 +42,7 @@ func (c *userController) postLogin(ctx *gin.Context) {
 		return
 	}
 
-	if err := c.middleware.SessionManager.BindSessionToUser(ctx, &user); err != nil {
+	if err := c.middlewareController.SessionManager.BindSessionToUser(ctx, &user); err != nil {
 		c.renderLoginPage(ctx, loginRequest.Username, err)
 		return
 	}
