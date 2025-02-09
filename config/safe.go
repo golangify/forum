@@ -44,4 +44,18 @@ func (c *Config) safe() {
 	if c.Section.MaxBodyLength == 0 || c.Section.MaxBodyLength < c.Section.MinBodyLength {
 		c.Section.MaxBodyLength = c.Section.MinBodyLength + 4000
 	}
+
+	// topic
+	if c.Topic.MinTitleLength == 0 {
+		c.Topic.MinTitleLength = 1
+	}
+	if c.Topic.MaxTitleLength == 0 || c.Topic.MaxTitleLength < c.Topic.MinTitleLength {
+		c.Topic.MaxTitleLength = c.Topic.MinTitleLength + 100
+	}
+	if c.Topic.MinBodyLength == 0 {
+		c.Topic.MinBodyLength = 1
+	}
+	if c.Topic.MaxBodyLength == 0 || c.Topic.MaxBodyLength < c.Topic.MinBodyLength {
+		c.Topic.MaxBodyLength = c.Topic.MinBodyLength + 4000
+	}
 }

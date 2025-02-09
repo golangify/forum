@@ -29,7 +29,7 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	if err = database.AutoMigrate(&models.User{}, &models.Session{}, &models.Section{}); err != nil {
+	if err = database.AutoMigrate(&models.User{}, &models.Session{}, &models.Section{}, &models.Topic{}); err != nil {
 		log.Fatalln(err)
 	}
 

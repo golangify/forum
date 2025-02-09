@@ -78,3 +78,7 @@ func (c *MiddlewareController) IfAuthorized(ctx *gin.Context) {
 		ctx.Abort()
 	}
 }
+
+func (c *MiddlewareController) IfAdministrator(ctx *gin.Context) {
+
+}

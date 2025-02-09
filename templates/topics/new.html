@@ -1,0 +1,18 @@
+{{ define "topics/new" }}
+{{ template "header" . }}
+<section>
+    <h1 class="mb-10">Новая тема в разделе "{{ .section.Title }}"</h1>
+    <form class="flex flex-column" method="post" action="/topics">
+        <input type="hidden" name="section_id" value="{{ .section.ID }}">
+        <label for="title">Заголовок</label>
+        <input class="mb-10" type="text" name="title" value="{{ .topic_title }}">
+        <label for="body">Описание</label>
+        <textarea class="mb-10" name="body">{{ .topic_body }}</textarea>
+        {{ if .error }}
+        <div class="text-red mb-10">{{ .error }}</div>
+        {{ end }}
+        <input type="submit" value="создать тему" title="создать новую тему">
+    </form>
+</section>
+{{ template "footer" . }}
+{{ end }}

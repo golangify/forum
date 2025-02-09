@@ -11,7 +11,7 @@ func (c *sectionController) get(ctx *gin.Context) {
 	session, _ := c.middlewareController.SessionManager.GetSession(ctx)
 
 	var sections []models.Section
-	err := c.database.Preload("User").Find(&sections).Error
+	err := c.database.Order("updated_at DESC").Preload("User").Find(&sections).Error
 	if err != nil {
 		ctx.Set("error", err.Error())
 		c.errorController.InternalServerError(ctx)

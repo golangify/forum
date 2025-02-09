@@ -23,6 +23,7 @@ func NewSectionController(config *config.Config, engine *gin.Engine, database *g
 		engine:               engine,
 		database:             database,
 		middlewareController: middlewareController,
+		errorController:      errorController,
 	}
 
 	g := c.engine.Group("/sections")

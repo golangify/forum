@@ -72,6 +72,9 @@
     text-overflow: ellipsis;    
     max-width: 100%;               
 }
+.color-inherit {
+    color: inherit;
+}
 
 .whitespace-nowrap {
     white-space: nowrap;
@@ -81,6 +84,13 @@
     text-decoration: none;
 }
 
-.background-secondary {
+.bg-secondary {
     background-color: var(--background-color-secondary);
+}
+.bg-hover-accent:hover {
+    background-color: var(--background-color-accent);
+}
+
+.br-10 {
+    border-radius: 10px;
 }

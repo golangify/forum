@@ -2,12 +2,12 @@
 {{ template "header" . }}
 <section>
     {{ if .session.User }}
-    <a href="/sections/new" class="material-symbols-outlined button" title="создать новый раздел">add</a>
+    <a href="/sections/new" class="color-inherit material-symbols-outlined button" title="создать новый раздел">add</a>
     {{ end }}
     <h1 class="center mb-10">Разделы</h1>
     {{ range .sections }}
-    <a class="decoration-none" href="/sections/{{ .ID }}" title="{{ .Body }}">
-        <div class="w-100 mb-10">
+    <a class="color-inherit decoration-none" href="/sections/{{ .ID }}" title="{{ .Body }}">
+        <div class="w-100 mb-10 bg-secondary bg-hover-accent p-10 br-10">
             <header class="flex justify-between items-center">
                 <span class="truncate max-w-xs">{{ .Title }}</span>
                 <time class="ml-10 whitespace-nowrap">{{ timeAgo .UpdatedAt }}</time>

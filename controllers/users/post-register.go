@@ -1,6 +1,7 @@
 package usercontroller
 
 import (
+	"errors"
 	"forum/models"
 	"net/http"
 
@@ -27,13 +28,23 @@ func (c *userController) postRegister(ctx *gin.Context) {
 		return
 	}
 
+	var registeredUser models.User
+	if err = c.database.First(&registeredUser, "username = ?", registerRequest.Username).Error; err != nil {
+		c.renderRegisterPage(ctx, registerRequest.Username, err)
+		return
+	}
+	if registeredUser.ID != 0 {
+		c.renderRegisterPage(ctx, registerRequest.Username, errors.New("пользователь с таким именем уже существует"))
+		return
+	}
+
 	hashedPassword, err := c.hashPassword(registerRequest.Password)
 	if err != nil {
 		c.renderRegisterPage(ctx, registerRequest.Username, err)
 		return
 	}
 
-	var registeredUser = models.User{
+	registeredUser = models.User{
 		Username:     registerRequest.Username,
 		PasswordHash: hashedPassword,
 	}

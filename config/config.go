@@ -10,6 +10,7 @@ type Config struct {
 
 	User    userConfig    `json:"user"`
 	Section sectionConfig `json:"section"`
+	Topic   topicConfig   `json:"topic"`
 }
 
 type sessionConfig struct {
@@ -26,6 +27,14 @@ type userConfig struct {
 }
 
 type sectionConfig struct {
+	MinTitleLength uint16 `json:"min_title_length"`
+	MaxTitleLength uint16 `json:"max_title_length"`
+
+	MinBodyLength uint16 `json:"min_body_length"`
+	MaxBodyLength uint16 `json:"max_body_length"`
+}
+
+type topicConfig struct {
 	MinTitleLength uint16 `json:"min_title_length"`
 	MaxTitleLength uint16 `json:"max_title_length"`
 
