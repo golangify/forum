@@ -14,8 +14,7 @@ type newSectionRequest struct {
 }
 
 func (c *sectionController) post(ctx *gin.Context) {
-	v, _ := ctx.Get("session")
-	session := v.(*models.Session)
+	session, _ := c.middlewareController.SessionManager.GetSession(ctx)
 	var newSectionRequest newSectionRequest
 	if err := ctx.ShouldBind(&newSectionRequest); err != nil {
 		c.renderNewSectionPage(ctx, newSectionRequest.Title, newSectionRequest.Body, err)

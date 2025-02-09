@@ -3,6 +3,8 @@ package middlewarecontroller
 import (
 	"forum/config"
 	sessionmanager "forum/controllers/middleware/session-manager"
+	"html/template"
+	"net/http"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -58,4 +60,21 @@ func (c *MiddlewareController) Identificate(ctx *gin.Context) {
 		}
 	}
 	ctx.Set("session", session)
+}
+
+func (c *MiddlewareController) IfAuthorized(ctx *gin.Context) {
+	session, err := c.SessionManager.GetSession(ctx)
+	if err != nil {
+		ctx.AbortWithStatusJSON(500, gin.H{"error": err.Error()})
+		return
+	}
+	if session == nil || session.User == nil {
+		ctx.HTML(http.StatusForbidden, "error/error", gin.H{
+			"title":   "Недостаточно прав",
+			"code":    http.StatusForbidden,
+			"error":   template.HTML("необходима <a href='/users/login'>авторизация</a> для доступа к этой странице"),
+			"session": session,
+		})
+		ctx.Abort()
+	}
 }

@@ -7,7 +7,7 @@ import (
 )
 
 func (c *sectionController) renderNewSectionPage(ctx *gin.Context, title string, body string, err error) {
-	session, _ := ctx.Get("session")
+	session, _ := c.middlewareController.SessionManager.GetSession(ctx)
 	var errorStr string
 	if err != nil {
 		errorStr = err.Error()

@@ -6,8 +6,8 @@ function logout() {
             window.location.reload()
         },
         error: function(xhr, status, error) {
-            console.log(xhr)
-            toast(error)
+            console.log(xhr, status, error)
+            toast(status)
         }
     });
 }

@@ -37,7 +37,7 @@ a {
     color:var(--url-color)
 }
 a:visited {
-    background-color: inherit;
+    color: inherit;
 }
 
 body > header {
@@ -112,6 +112,7 @@ textarea {
 }
 
 section.login,
-section.register {
+section.register,
+section.error {
     max-width: 400px;
 }

@@ -6,7 +6,6 @@ import (
 	"time"
 )
 
-// formatTimeDifference принимает время (e) и возвращает строку с разницей между текущим моментом и e.
 func timeAgo(e interface{}) string {
 	var t time.Time
 	switch v := e.(type) {
@@ -18,16 +17,13 @@ func timeAgo(e interface{}) string {
 		return ""
 	}
 
-	// Загружаем временную зону UTC+3
 	location, err := time.LoadLocation("Europe/Moscow")
 	if err != nil {
 		return ""
 	}
 
-	// Преобразуем время t в временную зону UTC+3
 	t = t.In(location)
 
-	// Вычисляем разницу в секундах между текущим временем и t
 	seconds := int(time.Since(t).Seconds())
 	minutes := seconds / 60
 	hours := minutes / 60

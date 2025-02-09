@@ -1,8 +1,8 @@
 {{ define "error/error" }}
 {{ template "header" . }}
-<section>
-    <h1 class="center">Ошибка {{ .code }}</h1>
-    <div class="center text-red">{{ .error }}</div>
+<section class="error">
+    <h1 class="center mb-10">Ошибка {{ .code }}</h1>
+    <div class="mt-10 center text-red">{{ .error }}</div>
 </section>
 {{ template "footer" . }}
 {{ end }}

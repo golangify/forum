@@ -8,7 +8,7 @@ import (
 
 type Session struct {
 	gorm.Model
-	Identificator string `gorm:"index"`
+	Identificator string `gorm:"index;unique"`
 	UserID        uint
 	User          *User `gorm:"foreignKey:UserID"`
 	FirstIP       string
