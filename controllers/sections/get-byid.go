@@ -13,7 +13,7 @@ import (
 func (c *sectionController) getByID(ctx *gin.Context) {
 	sectionID, _ := strconv.ParseUint(ctx.Param("id"), 10, 32)
 	var section models.Section
-	if err := c.database.Preload("User").First(&section, sectionID).Error; err != nil {
+	if err := c.database.First(&section, sectionID).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
 			c.errorController.NotFound(ctx)
 			return

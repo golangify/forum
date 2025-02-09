@@ -1,10 +1,10 @@
 {{ define "topics/topic" }}
 {{ template "header" . }}
 <section class="topic">
-    <nav><a href="/" class="material-symbols-outlined">home</a><a href="/sections/{{ .section.ID }}">«{{ .section.Title }}»</a><a href="/topics/{{ .topic.ID }}">{{ .topic.Title }}</a></nav>
+    <nav class="mb-10"><a href="/" class="material-symbols-outlined decoration-none">home</a> / <a href="/sections/{{ .section.ID }}">{{ .section.Title }}</a> / <a href="/topics/{{ .topic.ID }}">{{ .topic.Title }}</a></nav>
     <h1 class="mb-10">{{ .topic.Title }}</h1>
-    <div>{{ .topic.Body }}</div>
-    <div class="m-10">Тут комментарии</div>
+    <div class="mb-10">{{ .topic.Body }}</div>
+    <div class="text-disabled">Тут пока пусто</div>
 </section>
 {{ template "footer" . }}
 {{ end }}

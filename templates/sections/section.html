@@ -1,6 +1,7 @@
 {{ define "sections/section" }}
 {{ template "header" . }}
 <section class="section">
+    <nav class="mb-10"><a href="/" class="material-symbols-outlined decoration-none">home</a> / <a href="/sections/{{ .section.ID }}" class="decoration-none">{{ .section.Title }}</a></nav>
     {{ if .session.User }}
         <div><a href="/topics/new?section_id={{ .section.ID }}" class="color-inherit ml-10 material-symbols-outlined button mb-10" title="создать новую тему">add</a></div>
     {{ end }}

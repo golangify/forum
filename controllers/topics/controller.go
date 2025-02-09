@@ -28,6 +28,7 @@ func NewTopicController(config *config.Config, engine *gin.Engine, database *gor
 
 	g := c.engine.Group("/topics")
 	{
+		g.GET("/:id", c.getByID)
 		g.GET("/new", c.middlewareController.IfAuthorized, c.getNew)
 		g.POST("/", c.middlewareController.IfAuthorized, c.post)
 	}
