@@ -1,0 +1,13 @@
+{{ define "topics/page" }}
+{{ range .topics }}
+<a class="color-inherit decoration-none" href="/topics/{{ .ID }}" title="{{ .Body }}">
+    <div class="w-100 mb-10 bg-secondary bg-hover-accent p-10 br-10">
+        <header class="flex justify-between items-center">
+            <span class="truncate">{{ .Title }}</span>
+            <time class="ml-10 whitespace-nowrap">{{ timeAgo .UpdatedAt }}</time>
+        </header>
+        <div class="text-disabled truncate">{{ .Body }}</div>
+    </div>
+</a>
+{{ end }}
+{{ end }}

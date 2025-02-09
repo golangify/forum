@@ -1,7 +1,7 @@
 {{ define "topics/topic" }}
 {{ template "header" . }}
 <section class="topic">
-    <nav class="mb-10"><a href="/" class="material-symbols-outlined decoration-none">home</a> / <a href="/sections/{{ .section.ID }}">{{ .section.Title }}</a> / <a href="/topics/{{ .topic.ID }}">{{ .topic.Title }}</a></nav>
+    <nav class="mb-10"><a href="/" class="material-symbols-outlined decoration-none">home</a> / <a href="/sections/{{ .section.ID }}">{{ .section.Title }}</a> / <span>{{ .topic.Title }}</span></nav>
     <h1 class="mb-10">{{ .topic.Title }}</h1>
     <div class="mb-10">{{ .topic.Body }}</div>
     <div class="text-disabled">Тут пока пусто</div>
