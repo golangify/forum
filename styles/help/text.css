@@ -1,0 +1,36 @@
+.text-red {
+    color: #ff4136;
+}
+
+.text-red:first-letter {
+    text-transform: uppercase;
+}
+
+.text-red::after {
+    content: '.';
+}
+
+.text-disabled {
+    color: var(--text-color-disabled);
+    font-size: 14px;
+}
+
+.truncate {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.color-inherit {
+    color: inherit;
+}
+
+.whitespace-nowrap {
+    white-space: nowrap;
+}
+
+.decoration-none {
+    text-decoration: none;
+}

@@ -1,0 +1,7 @@
+.bg-secondary {
+    background-color: var(--background-color-secondary);
+}
+
+.bg-hover-accent:hover {
+    background-color: var(--background-color-accent);
+}
