@@ -3,6 +3,7 @@ package usercontroller
 import (
 	"errors"
 	"forum/models"
+	"gorm.io/gorm"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -30,8 +31,10 @@ func (c *userController) postRegister(ctx *gin.Context) {
 
 	var registeredUser models.User
 	if err = c.database.First(&registeredUser, "username = ?", registerRequest.Username).Error; err != nil {
-		c.renderRegisterPage(ctx, registerRequest.Username, err)
-		return
+		if err != gorm.ErrRecordNotFound {
+			c.renderRegisterPage(ctx, registerRequest.Username, err)
+			return
+		}
 	}
 	if registeredUser.ID != 0 {
 		c.renderRegisterPage(ctx, registerRequest.Username, errors.New("пользователь с таким именем уже существует"))

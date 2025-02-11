@@ -10,6 +10,7 @@ import (
 	usercontroller "forum/controllers/users"
 	"forum/models"
 	templatesutils "forum/utils/templates"
+	"github.com/gin-gonic/autotls"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -53,5 +54,12 @@ func main() {
 	topiccontroller.NewTopicController(config, engine, database, middlewareController, errorController)
 	usercontroller.NewUserController(config, engine, database, middlewareController, errorController)
 
-	engine.Run(":8080")
+	if config.Mode == "release" {
+		log.Fatal(autotls.Run(engine, "chatpix.site"))
+	} else {
+		log.Println("Running on :8080")
+		if err := engine.Run(":8080"); err != nil {
+			log.Fatal(err)
+		}
+	}
 }
