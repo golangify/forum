@@ -31,6 +31,8 @@ func NewUserController(config *config.Config, engine *gin.Engine, database *gorm
 		g.GET("/login", c.getLogin)
 		g.POST("/login", c.postLogin)
 
+		g.GET("/:id", c.getByID)
+
 		g.GET("/register", c.getRegister)
 		g.POST("/register", c.postRegister)
 

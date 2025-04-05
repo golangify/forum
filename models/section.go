@@ -1,6 +1,10 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"html/template"
+
+	"gorm.io/gorm"
+)
 
 type Section struct {
 	gorm.Model
@@ -8,6 +12,7 @@ type Section struct {
 	User          *User `gorm:"foreignKey:UserID"`
 	Title         string
 	Body          string
+	BodyHTML      template.HTML
 	TopicsCount   uint
 	CommentsCount uint
 }

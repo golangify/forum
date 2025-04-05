@@ -5,6 +5,7 @@ import (
 	sessionmanager "forum/controllers/middleware/session-manager"
 	"html/template"
 	"net/http"
+	"slices"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -30,24 +31,24 @@ func NewMiddlewareController(config *config.Config, engine *gin.Engine, database
 func (c *MiddlewareController) Identificate(ctx *gin.Context) {
 	session, err := c.SessionManager.GetSession(ctx)
 	if err != nil {
-		ctx.AbortWithStatusJSON(500, gin.H{"error": err.Error()})
+		ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	if session == nil {
 		session, err = c.SessionManager.NewSession(ctx)
 		if err != nil {
-			ctx.AbortWithStatusJSON(500, gin.H{"error": err.Error()})
+			ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
 	}
 	if time.Now().After(session.ExpiresAt) {
 		if err = c.database.Delete(session).Error; err != nil {
-			ctx.AbortWithStatusJSON(500, gin.H{"error": err.Error()})
+			ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
 		session, err = c.SessionManager.NewSession(ctx)
 		if err != nil {
-			ctx.AbortWithStatusJSON(500, gin.H{"error": err.Error()})
+			ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
 	}
@@ -55,7 +56,7 @@ func (c *MiddlewareController) Identificate(ctx *gin.Context) {
 	if session.LastIP != clientIP {
 		session.LastIP = clientIP
 		if err = c.database.Updates(session).Error; err != nil {
-			ctx.AbortWithStatusJSON(500, gin.H{"error": err.Error()})
+			ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
 	}
@@ -65,7 +66,7 @@ func (c *MiddlewareController) Identificate(ctx *gin.Context) {
 func (c *MiddlewareController) IfAuthorized(ctx *gin.Context) {
 	session, err := c.SessionManager.GetSession(ctx)
 	if err != nil {
-		ctx.AbortWithStatusJSON(500, gin.H{"error": err.Error()})
+		ctx.AbortWithStatusJSON(http.StatusForbidden, gin.H{"error": err.Error()})
 		return
 	}
 	if session == nil || session.User == nil {
@@ -80,5 +81,25 @@ func (c *MiddlewareController) IfAuthorized(ctx *gin.Context) {
 }
 
 func (c *MiddlewareController) IfAdministrator(ctx *gin.Context) {
-
+	session, err := c.SessionManager.GetSession(ctx)
+	if err != nil {
+		ctx.HTML(http.StatusForbidden, "error/error", gin.H{
+			"title":   "Недостаточно прав",
+			"code":    http.StatusForbidden,
+			"error":   template.HTML("необходима <a href='/users/login'>авторизация</a> для доступа к этой странице"),
+			"session": session,
+		})
+		ctx.Abort()
+		return
+	}
+	if !slices.Contains(session.User.Roles, "admin") {
+		ctx.HTML(http.StatusForbidden, "error/error", gin.H{
+			"title":   "Недостаточно прав",
+			"code":    http.StatusForbidden,
+			"error":   template.HTML("необходим админ-аккаунт для доступа к этой странице"),
+			"session": session,
+		})
+		ctx.Abort()
+		return
+	}
 }

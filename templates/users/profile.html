@@ -1,0 +1,8 @@
+{{ define "users/profile" }}
+{{ template "header" . }}
+<section class="user-profile">
+    <h1 class="mb-10">{{ .user.Username }}</h1>
+    {{ .user.Roles }}
+</section>
+{{ template "footer" . }}
+{{ end }}

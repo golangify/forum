@@ -18,14 +18,14 @@ func (m *SessionManager) generateSessionIdentificator() string {
 }
 
 func (c *SessionManager) setSession(ctx *gin.Context, sessionID string, maxAge int) {
-	secure := ctx.Request.TLS != nil
+	isSecure := ctx.Request.TLS != nil
 	cookie := &http.Cookie{
 		Name:     "session",
 		Value:    sessionID,
 		Path:     "/",
 		Domain:   "",
 		MaxAge:   maxAge,
-		Secure:   secure,
+		Secure:   isSecure,
 		HttpOnly: true,
 		SameSite: http.SameSiteLaxMode,
 	}

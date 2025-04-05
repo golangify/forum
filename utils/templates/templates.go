@@ -27,7 +27,8 @@ func Init(config *config.Config, engine *gin.Engine) error {
 	}
 
 	engine.SetFuncMap(template.FuncMap{
-		"timeAgo": timeAgo,
+		"timeAgo":         timeAgo,
+		"isAdministrator": isAdministrator,
 	})
 	engine.LoadHTMLFiles(templateFiles...)
 

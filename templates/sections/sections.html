@@ -1,10 +1,12 @@
 {{ define "sections/sections" }}
 {{ template "header" . }}
 <section>
-    {{ if .session.User }}
-    <a href="/sections/new" class="color-inherit material-symbols-outlined button" title="создать новый раздел">add</a>
-    {{ end }}
-    <h1 class="center mb-10">Разделы</h1>
+    <div class="flex flex-row mb-10">
+        <h1 class="center mb-10 flex-auto">Разделы</h1>
+        {{ if and (.session.User) (isAdministrator .session.User) }}
+            <a href="/sections/new" class="color-inherit material-symbols-outlined button" title="создать новый раздел">add</a>
+        {{ end }}
+    </div>
     {{ range .sections }}
     <a class="color-inherit decoration-none" href="/sections/{{ .ID }}" title="{{ .Body }}">
         <div class="w-100 mb-10 bg-secondary bg-hover-accent p-10 br-10">

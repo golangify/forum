@@ -20,3 +20,7 @@ time {
     font-size: 13px;
     width: max-content;
 }
+
+.material-symbols-outlined {
+    line-height: initial !important;
+}

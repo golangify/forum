@@ -2,10 +2,12 @@
 {{ template "header" . }}
 <section class="section">
     <nav class="mb-10"><a href="/" class="material-symbols-outlined decoration-none">home</a> / <span>{{ .section.Title }}</span></nav>
-    {{ if .session.User }}
-        <div><a href="/topics/new?section_id={{ .section.ID }}" class="color-inherit ml-10 material-symbols-outlined button mb-10" title="создать новую тему">add</a></div>
-    {{ end }}
-    <h1 class="mb-10">{{ .section.Title }}</h1>
+    <div class="flex flex-row">
+        <h1 class="mb-10 flex-auto">{{ .section.Title }}</h1>
+        {{ if .session.User }}
+            <div><a href="/topics/new?section_id={{ .section.ID }}" class="color-inherit ml-10 material-symbols-outlined button" title="создать новую тему">add</a></div>
+        {{ end }}
+    </div>
     <div class="mb-10">{{ .section.Body }}</div>
     {{ if not .topics }}
     <div class="m-10  text-disabled">Тут пока пусто</div>

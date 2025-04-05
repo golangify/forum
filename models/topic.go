@@ -1,6 +1,10 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"html/template"
+
+	"gorm.io/gorm"
+)
 
 type Topic struct {
 	gorm.Model
@@ -10,5 +14,6 @@ type Topic struct {
 	User          *User `gorm:"foreignKey:UserID"`
 	Title         string
 	Body          string
+	BodyHTML      template.HTML
 	CommentsCount uint
 }
